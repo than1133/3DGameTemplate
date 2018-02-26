@@ -1,0 +1,140 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://scripts/Character.gd" type="Script" id=1]
+[ext_resource path="res://models/players/player1.scn" type="PackedScene" id=2]
+
+[sub_resource type="CapsuleShape" id=1]
+
+radius = 0.663982
+height = 2.02157
+
+[node name="player1" type="KinematicBody" groups=[
+"player",
+]]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+input/ray_pickable = true
+input/capture_on_drag = false
+shape_count = 1
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -0.0363235, 1.73132, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collide_with/static = true
+collide_with/kinematic = true
+collide_with/rigid = true
+collide_with/character = true
+collision/margin = 0.5
+script/script = ExtResource( 1 )
+player_walk_accelerate = 1
+player_max_walk_speed = 0.1
+can_run = false
+player_run_accelerate = 1
+player_max_run_speed = 0.2
+Gravity = 5
+can_jump = false
+jump_accelerate = 100
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -0.0363235, 1.73132, 0 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="cam" type="Spatial" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="pivot" type="Spatial" parent="cam"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 0.921582, 0.388183, 0, -0.388183, 0.921582, 0, 2.38718, 0 )
+
+[node name="Camera" type="Camera" parent="cam/pivot"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0188041, 12.2747 )
+projection = 0
+fov = 60.0
+near = 0.1
+far = 300.0
+keep_aspect = 1
+current = true
+visible_layers = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+
+[node name="ray" type="RayCast" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -0.5, 0 )
+layer_mask = 1
+type_mask = 15
+
+[node name="player" parent="." instance=ExtResource( 2 )]
+
+[node name="Armature" parent="player"]
+
+transform/local = Transform( 0.266697, 0, 0, 0, 0.266697, 0, 0, 0, 0.266697, 0, 0, 0 )
+
+[node name="AnimationTreePlayer" type="AnimationTreePlayer" parent="."]
+
+playback/process_mode = 1
+base_path = NodePath("../player")
+master_player = NodePath("../player/AnimationPlayer")
+data = {
+"active": true,
+"connections": [ "transition", "out", 0, "anim", "transition", 0, "anim 2", "transition", 1, "anim 3", "transition", 2, "anim 4", "transition", 3 ],
+"master": NodePath("../player/AnimationPlayer"),
+"nodes": [ {
+"filter": [  ],
+"from": "idle",
+"id": "anim",
+"pos": Vector2( 33, 111 ),
+"type": "animation"
+}, {
+"id": "out",
+"pos": Vector2( 344, 229 ),
+"type": "output"
+}, {
+"id": "transition",
+"pos": Vector2( 226, 226 ),
+"transitions": [ {
+"auto_advance": false
+}, {
+"auto_advance": false
+}, {
+"auto_advance": false
+}, {
+"auto_advance": false
+} ],
+"type": "transition",
+"xfade": 0.5
+}, {
+"filter": [  ],
+"from": "run",
+"id": "anim 3",
+"pos": Vector2( 39, 309 ),
+"type": "animation"
+}, {
+"filter": [  ],
+"from": "walk",
+"id": "anim 2",
+"pos": Vector2( 38, 211 ),
+"type": "animation"
+}, {
+"filter": [  ],
+"from": "jump",
+"id": "anim 4",
+"pos": Vector2( 36, 410 ),
+"type": "animation"
+} ]
+}
+
+
+[editable path="player"]

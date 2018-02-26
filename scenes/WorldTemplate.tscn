@@ -1,0 +1,250 @@
+[gd_scene load_steps=19 format=1]
+
+[ext_resource path="res://scripts/WorldTemplate.gd" type="Script" id=1]
+[ext_resource path="res://objects/DeadZone.tscn" type="PackedScene" id=2]
+[ext_resource path="res://gui/InGameMenu.tscn" type="PackedScene" id=3]
+[ext_resource path="res://players/player0.tscn" type="PackedScene" id=4]
+[ext_resource path="res://enemys/enemy0.tscn" type="PackedScene" id=5]
+[ext_resource path="res://enemys/enemy1.tscn" type="PackedScene" id=6]
+[ext_resource path="res://models/floors/floor0.scn" type="PackedScene" id=7]
+[ext_resource path="res://models/floors/floor1.scn" type="PackedScene" id=8]
+[ext_resource path="res://models/floors/stone0.scn" type="PackedScene" id=9]
+[ext_resource path="res://models/floors/tree0.scn" type="PackedScene" id=10]
+[ext_resource path="res://models/floors/grass0.scn" type="PackedScene" id=11]
+[ext_resource path="res://models/floors/fence0.scn" type="PackedScene" id=12]
+[ext_resource path="res://objects/coin.scn" type="PackedScene" id=13]
+[ext_resource path="res://objects/chest_show_pic.tscn" type="PackedScene" id=14]
+[ext_resource path="res://objects/chest_show_text.tscn" type="PackedScene" id=15]
+[ext_resource path="res://objects/question.tscn" type="PackedScene" id=16]
+[ext_resource path="res://objects/Portal.tscn" type="PackedScene" id=17]
+
+[sub_resource type="Environment" id=1]
+
+ambient_light/enabled = true
+ambient_light/color = Color( 1, 1, 1, 1 )
+ambient_light/energy = 0.27
+fxaa/enabled = false
+background/mode = 2
+background/color = Color( 0.125549, 0.945312, 0.906886, 1 )
+background/energy = 1.0
+background/scale = 1.0
+background/glow = 0.0
+background/canvas_max_layer = 25
+glow/enabled = true
+glow/blur_passes = 1
+glow/blur_scale = 1
+glow/blur_strength = 1
+glow/blur_blend_mode = null
+glow/bloom = 0.0
+glow/bloom_treshold = 0.5
+dof_blur/enabled = false
+dof_blur/blur_passes = 1
+dof_blur/begin = 100.0
+dof_blur/range = 10.0
+hdr/enabled = false
+hdr/tonemapper = 0
+hdr/exposure = 0.6
+hdr/white = 1.0
+hdr/glow_treshold = 0.95
+hdr/glow_scale = 0.2
+hdr/min_luminance = 0.4
+hdr/max_luminance = 8.0
+hdr/exposure_adj_speed = 0.5
+fog/enabled = true
+fog/begin = 100.0
+fog/begin_color = Color( 0, 0, 0, 1 )
+fog/end_color = Color( 0, 0, 0, 1 )
+fog/attenuation = 1.0
+fog/bg = true
+bcs/enabled = false
+bcs/brightness = 1.0
+bcs/contrast = 1.0
+bcs/saturation = 1.0
+srgb/enabled = false
+
+[node name="World" type="Spatial"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+script/script = ExtResource( 1 )
+day_night = 1
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+environment = SubResource( 1 )
+
+[node name="Sun" type="DirectionalLight" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 0.875976, 0.0439952, -0.480345, 0.323744, 0.684586, 0.653095, 0.35757, -0.727604, 0.585437, 0, 18.5489, 7.7119 )
+layers = 1
+params/enabled = true
+params/editor_only = false
+params/bake_mode = 0
+params/energy = 1.0
+colors/diffuse = Color( 1, 1, 1, 1 )
+colors/specular = Color( 1, 1, 1, 1 )
+shadow/shadow = true
+shadow/darkening = 0.0
+shadow/z_offset = 0.091
+shadow/z_slope_scale = 0.0
+shadow/esm_multiplier = 60.0
+shadow/blur_passes = 1.0
+projector = null
+operator = 0
+shadow/mode = 3
+shadow/max_distance = 319.25
+shadow/split_weight = 0.86
+shadow/zoffset_scale = 2.0
+
+[node name="DeadZone" parent="." instance=ExtResource( 2 )]
+
+transform/local = Transform( 123.799, 0, 0, 0, 123.799, 0, 0, 0, 123.799, 0, -18.8556, 0 )
+apply_damage = 0
+
+[node name="bgm" type="StreamPlayer" parent="."]
+
+stream/stream = null
+stream/play = false
+stream/loop = false
+stream/volume_db = 0.0
+stream/autoplay = false
+stream/paused = false
+stream/loop_restart_time = 0.0
+stream/buffering_ms = 500
+
+[node name="InGameMenu" parent="." instance=ExtResource( 3 )]
+
+[node name="player" type="Spatial" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="player0" parent="player" instance=ExtResource( 4 )]
+
+can_run = true
+can_jump = true
+
+[node name="enemys" type="Spatial" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="enemy0" parent="enemys" instance=ExtResource( 5 )]
+
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.30582, 0.277641, 9.61075 )
+damage = 0
+MoveType = "idle"
+
+[node name="enemy1" parent="enemys" instance=ExtResource( 6 )]
+
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 7.07606, 0.118408, 10.0416 )
+MoveType = "idle"
+
+[node name="grounds" type="Spatial" parent="."]
+
+editor/display_folded = true
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="floor0" parent="grounds" instance=ExtResource( 7 )]
+
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0643034, -0.97509, 12.6487 )
+
+[node name="floor1" parent="grounds" instance=ExtResource( 8 )]
+
+transform/local = Transform( 2.18655, 0, 0, 0, 2.18655, 0, 0, 0, 2.18655, 0, 0, 0 )
+
+[node name="stones" type="Spatial" parent="."]
+
+editor/display_folded = true
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="stone0" parent="stones" instance=ExtResource( 9 )]
+
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.44817, 0.21462, 8.97416 )
+
+[node name="trees" type="Spatial" parent="."]
+
+editor/display_folded = true
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="tree0" parent="trees" instance=ExtResource( 10 )]
+
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -9.78768, 0.216667, -10.3184 )
+
+[node name="grass" type="Spatial" parent="."]
+
+editor/display_folded = true
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="grass0" parent="grass" instance=ExtResource( 11 )]
+
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.45812, -0.0512257, 8.81155 )
+
+[node name="fences" type="Spatial" parent="."]
+
+editor/display_folded = true
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="fence0" parent="fences" instance=ExtResource( 12 )]
+
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -8.7976, 0.593036, -10.5677 )
+
+[node name="coins" type="Spatial" parent="."]
+
+editor/display_folded = true
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="coin" parent="coins" instance=ExtResource( 13 )]
+
+transform/local = Transform( -0.489749, 0, 0.871863, 0, 1, 0, -0.871863, 0, -0.489749, 6.98151, 0, 0 )
+
+[node name="coin1" parent="coins" instance=ExtResource( 13 )]
+
+transform/local = Transform( -0.489749, 0, 0.871863, 0, 1, 0, -0.871863, 0, -0.489749, 6.98151, 0, -3.02493 )
+
+[node name="coin2" parent="coins" instance=ExtResource( 13 )]
+
+transform/local = Transform( -0.489749, 0, 0.871863, 0, 1, 0, -0.871863, 0, -0.489749, 6.98151, 0, -6.1096 )
+
+[node name="coin3" parent="coins" instance=ExtResource( 13 )]
+
+transform/local = Transform( -0.489748, 0, 0.871862, 0, 1, 0, -0.871862, 0, -0.489748, 6.98151, 0, -9.38092 )
+
+[node name="coin4" parent="coins" instance=ExtResource( 13 )]
+
+transform/local = Transform( -0.489748, 0, 0.871862, 0, 1, 0, -0.871862, 0, -0.489748, 4.16458, 0, -9.38092 )
+
+[node name="coin5" parent="coins" instance=ExtResource( 13 )]
+
+transform/local = Transform( -0.489748, 0, 0.871862, 0, 1, 0, -0.871862, 0, -0.489748, 0.4696, 0, -9.38092 )
+
+[node name="chests" type="Spatial" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="chest_show_pic" parent="chests" instance=ExtResource( 14 )]
+
+transform/local = Transform( 0.601214, 0, 0, 0, 0.601214, 0, 0, 0, 0.601214, -9.57203, -0.176109, -1.37693 )
+picture = ""
+
+[node name="chest_show_text" parent="chests" instance=ExtResource( 15 )]
+
+transform/local = Transform( 0.557509, 0, 0, 0, 0.557509, 0, 0, 0, 0.557509, -9.58723, -0.125291, 1.22745 )
+text = ""
+
+[node name="questions" type="Spatial" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="question" parent="questions" instance=ExtResource( 16 )]
+
+transform/local = Transform( -0.32397, 0, 0.576739, 0, 0.6615, 0, -0.576739, 0, -0.32397, 4.26033, 0.378707, 12.8304 )
+
+[node name="portal" type="Spatial" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="Portal" parent="portal" instance=ExtResource( 17 )]
+
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -4.43182, -0.128859, 12.7234 )
+
+

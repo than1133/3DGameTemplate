@@ -1,0 +1,449 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://scripts/Portal.gd" type="Script" id=1]
+[ext_resource path="res://fonts/big_match_35.fnt" type="BitmapFont" id=2]
+[ext_resource path="res://objects/lgiht_shin.scn" type="PackedScene" id=3]
+
+[sub_resource type="BoxShape" id=1]
+
+extents = Vector3( 1.35314, 2.15375, 1.47939 )
+
+[sub_resource type="FixedMaterial" id=2]
+
+flags/visible = true
+flags/double_sided = false
+flags/invert_faces = false
+flags/unshaded = false
+flags/on_top = false
+flags/lightmap_on_uv2 = true
+flags/colarray_is_srgb = true
+params/blend_mode = 0
+params/depth_draw = 1
+params/line_width = 0.0
+fixed_flags/use_alpha = false
+fixed_flags/use_color_array = false
+fixed_flags/use_point_size = false
+fixed_flags/discard_alpha = false
+fixed_flags/use_xy_normalmap = false
+params/diffuse = Color( 1, 1, 1, 1 )
+params/specular = Color( 0, 0, 0, 1 )
+params/emission = Color( 1, 1, 1, 1 )
+params/specular_exp = 40
+params/detail_mix = 1.0
+params/normal_depth = 1
+params/shader = 0
+params/shader_param = 0.5
+params/glow = 0
+params/point_size = 1.0
+uv_xform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+textures/diffuse_tc = 0
+textures/detail_tc = 0
+textures/specular_tc = 0
+textures/emission_tc = 0
+textures/specular_exp_tc = 0
+textures/glow_tc = 0
+textures/normal_tc = 0
+textures/shade_param_tc = 0
+
+[node name="Portal" type="KinematicBody"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+input/ray_pickable = true
+input/capture_on_drag = false
+shape_count = 0
+collision/layers = 1
+collision/mask = 1
+collide_with/static = true
+collide_with/kinematic = true
+collide_with/rigid = true
+collide_with/character = true
+collision/margin = 0.001
+script/script = ExtResource( 1 )
+WarpTo = "res://scenes/title.tscn"
+
+[node name="Area" type="Area" parent="."]
+
+editor/display_folded = true
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.13526, 0 )
+input/ray_pickable = false
+input/capture_on_drag = false
+shape_count = 1
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+shapes/0/trigger = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = 9.8
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision/layers = 1
+collision/mask = 1
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="UI" type="Control" parent="."]
+
+process/pause_mode = 2
+visibility/visible = false
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1280.0
+margin/bottom = 720.0
+
+[node name="Panel" type="Panel" parent="UI"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 450.0
+margin/top = 220.0
+margin/right = 857.0
+margin/bottom = 384.0
+
+[node name="Title" type="Label" parent="UI"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 570.0
+margin/top = 240.0
+margin/right = 750.0
+margin/bottom = 270.0
+custom_fonts/font = ExtResource( 2 )
+text = "ไปด่านต่อไป"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="Yes" type="Button" parent="UI"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 530.0
+margin/top = 310.0
+margin/right = 589.0
+margin/bottom = 346.0
+custom_fonts/font = ExtResource( 2 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "ใช่"
+flat = false
+
+[node name="No" type="Button" parent="UI"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 730.0
+margin/top = 310.0
+margin/right = 777.0
+margin/bottom = 346.0
+custom_fonts/font = ExtResource( 2 )
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "ไม่ใช่"
+flat = false
+
+[node name="lgiht_shin" parent="." instance=ExtResource( 3 )]
+
+editor/display_folded = true
+transform/local = Transform( 1.33933, 0, 0, 0, 1.33933, 0, 0, 0, 1.33933, 0, 0, 0 )
+
+[node name="Particles" type="Particles" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, -1 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+material = SubResource( 2 )
+amount = 5
+emitting = true
+visibility = AABB( -0.780125, -0.875815, -0.602102, 2.38257, 2.35798, 3.70923 )
+emission_extents = Vector3( 0.1, 0.1, 0.1 )
+emission_base_velocity = Vector3( 0, 0, 0 )
+emission_points = Vector3Array(  )
+gravity_normal = Vector3( 0, -1, 0 )
+local_coords = false
+emit_timeout = 0.0
+vars/lifetime = 10.0
+vars/spread = 0.2
+vars/gravity = 0.0
+vars/linear_vel = 0.1
+vars/angular_vel = 0.0
+vars/linear_accel = 0.1
+vars/radial_accel = 0.0
+vars/tan_accel = 0.0
+vars/damping = 0.0
+vars/initial_size = 0.1
+vars/final_size = 0.1
+vars/initial_angle = 0.0
+vars/height_from_velocity = false
+vars/height = 1.0
+vars/height_speed_scale = 0.0
+rand/lifetime = 0.0
+rand/spread = 0.0
+rand/gravity = 0.0
+rand/linear_vel = 0.0
+rand/angular_vel = 0.0
+rand/linear_accel = 0.0
+rand/radial_accel = 0.0
+rand/tan_accel = 0.0
+rand/damping = 0.0
+rand/initial_size = 0.0
+rand/final_size = 0.0
+rand/initial_angle = 0.0
+rand/height = 0.0
+rand/height_speed_scale = 0.0
+color_phases/count = 0
+phase_0/pos = 0.0
+phase_0/color = Color( 1, 1, 1, 1 )
+phase_1/pos = 1.0
+phase_1/color = Color( 0, 0, 0, 1 )
+phase_2/pos = 1.0
+phase_2/color = Color( 0, 0, 0, 1 )
+phase_3/pos = 1.0
+phase_3/color = Color( 0, 0, 0, 1 )
+
+[node name="Particles2 2" type="Particles" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( -4.37114e-08, 1, 1.62921e-07, 0, -1.62921e-07, 1, 1, 4.37114e-08, 7.12149e-15, 1, 0, 4.37114e-08 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+material = SubResource( 2 )
+amount = 5
+emitting = true
+visibility = AABB( -0.780125, -0.875815, -0.602102, 2.38257, 2.35798, 3.70923 )
+emission_extents = Vector3( 0.1, 0.1, 0.1 )
+emission_base_velocity = Vector3( 0, 0, 0 )
+emission_points = Vector3Array(  )
+gravity_normal = Vector3( 0, -1, 0 )
+local_coords = false
+emit_timeout = 0.0
+vars/lifetime = 10.0
+vars/spread = 0.2
+vars/gravity = 0.0
+vars/linear_vel = 0.1
+vars/angular_vel = 0.0
+vars/linear_accel = 0.1
+vars/radial_accel = 0.0
+vars/tan_accel = 0.0
+vars/damping = 0.0
+vars/initial_size = 0.1
+vars/final_size = 0.1
+vars/initial_angle = 0.0
+vars/height_from_velocity = false
+vars/height = 1.0
+vars/height_speed_scale = 0.0
+rand/lifetime = 0.0
+rand/spread = 0.0
+rand/gravity = 0.0
+rand/linear_vel = 0.0
+rand/angular_vel = 0.0
+rand/linear_accel = 0.0
+rand/radial_accel = 0.0
+rand/tan_accel = 0.0
+rand/damping = 0.0
+rand/initial_size = 0.0
+rand/final_size = 0.0
+rand/initial_angle = 0.0
+rand/height = 0.0
+rand/height_speed_scale = 0.0
+color_phases/count = 0
+phase_0/pos = 0.0
+phase_0/color = Color( 1, 1, 1, 1 )
+phase_1/pos = 1.0
+phase_1/color = Color( 0, 0, 0, 1 )
+phase_2/pos = 1.0
+phase_2/color = Color( 0, 0, 0, 1 )
+phase_3/pos = 1.0
+phase_3/color = Color( 0, 0, 0, 1 )
+
+[node name="Particles1" type="Particles" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0, 0, 1 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+material = SubResource( 2 )
+amount = 5
+emitting = true
+visibility = AABB( -0.780125, -0.875815, -0.602102, 2.38257, 2.35798, 3.70923 )
+emission_extents = Vector3( 0.1, 0.1, 0.1 )
+emission_base_velocity = Vector3( 0, 0, 0 )
+emission_points = Vector3Array(  )
+gravity_normal = Vector3( 0, -1, 0 )
+local_coords = false
+emit_timeout = 0.0
+vars/lifetime = 10.0
+vars/spread = 0.2
+vars/gravity = 0.0
+vars/linear_vel = 0.1
+vars/angular_vel = 0.0
+vars/linear_accel = 0.1
+vars/radial_accel = 0.0
+vars/tan_accel = 0.0
+vars/damping = 0.0
+vars/initial_size = 0.1
+vars/final_size = 0.1
+vars/initial_angle = 0.0
+vars/height_from_velocity = false
+vars/height = 1.0
+vars/height_speed_scale = 0.0
+rand/lifetime = 0.0
+rand/spread = 0.0
+rand/gravity = 0.0
+rand/linear_vel = 0.0
+rand/angular_vel = 0.0
+rand/linear_accel = 0.0
+rand/radial_accel = 0.0
+rand/tan_accel = 0.0
+rand/damping = 0.0
+rand/initial_size = 0.0
+rand/final_size = 0.0
+rand/initial_angle = 0.0
+rand/height = 0.0
+rand/height_speed_scale = 0.0
+color_phases/count = 0
+phase_0/pos = 0.0
+phase_0/color = Color( 1, 1, 1, 1 )
+phase_1/pos = 1.0
+phase_1/color = Color( 0, 0, 0, 1 )
+phase_2/pos = 1.0
+phase_2/color = Color( 0, 0, 0, 1 )
+phase_3/pos = 1.0
+phase_3/color = Color( 0, 0, 0, 1 )
+
+[node name="Particles2" type="Particles" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( -4.37114e-08, 1, 1.62921e-07, 0, -1.62921e-07, 1, 1, 4.37114e-08, 7.12149e-15, -1, 0, -4.37114e-08 )
+layers = 1
+geometry/visible = true
+geometry/material_override = null
+geometry/cast_shadow = 1
+geometry/receive_shadows = true
+geometry/range_begin = 0.0
+geometry/range_end = 0.0
+geometry/extra_cull_margin = 0.0
+geometry/billboard = false
+geometry/billboard_y = false
+geometry/depth_scale = false
+geometry/visible_in_all_rooms = false
+geometry/use_baked_light = false
+geometry/baked_light_tex_id = 0
+material = SubResource( 2 )
+amount = 5
+emitting = true
+visibility = AABB( -0.780125, -0.875815, -0.602102, 2.38257, 2.35798, 3.70923 )
+emission_extents = Vector3( 0.1, 0.1, 0.1 )
+emission_base_velocity = Vector3( 0, 0, 0 )
+emission_points = Vector3Array(  )
+gravity_normal = Vector3( 0, -1, 0 )
+local_coords = false
+emit_timeout = 0.0
+vars/lifetime = 10.0
+vars/spread = 0.2
+vars/gravity = 0.0
+vars/linear_vel = 0.1
+vars/angular_vel = 0.0
+vars/linear_accel = 0.1
+vars/radial_accel = 0.0
+vars/tan_accel = 0.0
+vars/damping = 0.0
+vars/initial_size = 0.1
+vars/final_size = 0.1
+vars/initial_angle = 0.0
+vars/height_from_velocity = false
+vars/height = 1.0
+vars/height_speed_scale = 0.0
+rand/lifetime = 0.0
+rand/spread = 0.0
+rand/gravity = 0.0
+rand/linear_vel = 0.0
+rand/angular_vel = 0.0
+rand/linear_accel = 0.0
+rand/radial_accel = 0.0
+rand/tan_accel = 0.0
+rand/damping = 0.0
+rand/initial_size = 0.0
+rand/final_size = 0.0
+rand/initial_angle = 0.0
+rand/height = 0.0
+rand/height_speed_scale = 0.0
+color_phases/count = 0
+phase_0/pos = 0.0
+phase_0/color = Color( 1, 1, 1, 1 )
+phase_1/pos = 1.0
+phase_1/color = Color( 0, 0, 0, 1 )
+phase_2/pos = 1.0
+phase_2/color = Color( 0, 0, 0, 1 )
+phase_3/pos = 1.0
+phase_3/color = Color( 0, 0, 0, 1 )
+
+[connection signal="body_enter" from="Area" to="." method="_on_Area_body_enter"]
+
+[connection signal="pressed" from="UI/Yes" to="." method="_on_Yes_pressed"]
+
+[connection signal="pressed" from="UI/No" to="." method="_on_No_pressed"]
+
+

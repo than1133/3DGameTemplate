@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://scripts/Character.gd" type="Script" id=1]
+[ext_resource path="res://objects/characters/character_template.scn" type="PackedScene" id=2]
+
+[sub_resource type="CapsuleShape" id=1]
+
+radius = 0.663982
+height = 2.02157
+
+[node name="Character" type="KinematicBody" groups=[
+"player",
+]]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+input/ray_pickable = true
+input/capture_on_drag = false
+shape_count = 1
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -0.0363235, 1.73132, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collide_with/static = true
+collide_with/kinematic = true
+collide_with/rigid = true
+collide_with/character = true
+collision/margin = 0.5
+script/script = ExtResource( 1 )
+PlayerWalkAccelerate = 15
+PlayerMaxWalkSpeed = 0.2
+CanRun = false
+PlayerRunAccelerate = 50
+PlayerMaxRunSpeed = 0.5
+Gravity = 5
+CanJump = false
+JumpAccelerate = 100
+
+[node name="character_template" parent="." instance=ExtResource( 2 )]
+
+[node name="CollisionShape" type="CollisionShape" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, -0.0363235, 1.73132, 0 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="cam" type="Spatial" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+
+[node name="pivot" type="Spatial" parent="cam"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 0.921582, 0.388183, 0, -0.388183, 0.921582, 0, 2.38718, 0 )
+
+[node name="Camera" type="Camera" parent="cam/pivot"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0188041, 12.2747 )
+projection = 0
+fov = 60.0
+near = 0.1
+far = 300.0
+keep_aspect = 1
+current = true
+visible_layers = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+
+[node name="ray" type="RayCast" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -1, 0 )
+layer_mask = 1
+type_mask = 15
+
+

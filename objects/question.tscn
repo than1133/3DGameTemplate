@@ -1,0 +1,96 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://scripts/question.gd" type="Script" id=1]
+[ext_resource path="res://models/question/question.scn" type="PackedScene" id=2]
+[ext_resource path="res://gui/QuestionHUD.tscn" type="PackedScene" id=3]
+
+[sub_resource type="BoxShape" id=1]
+
+extents = Vector3( 1.7197, 2.45713, 1.46611 )
+
+[node name="question" type="KinematicBody"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 0.630952, 0, -0.198702, 0, 0.6615, 0, 0.198702, 0, 0.630952, 0, 0, 0 )
+input/ray_pickable = true
+input/capture_on_drag = false
+shape_count = 0
+collision/layers = 1
+collision/mask = 1
+collide_with/static = true
+collide_with/kinematic = true
+collide_with/rigid = true
+collide_with/character = true
+collision/margin = 0.001
+script/script = ExtResource( 1 )
+question = "คำถาม"
+choice1 = "คำตอบ 1"
+choice2 = "คำตอบ 2"
+choice3 = "คำตอบ 3"
+choice4 = "คำตอบ 4"
+choice_answer = null
+increase_score_if_true = 0
+decrease_score_if_false = 0
+
+[node name="question" parent="." instance=ExtResource( 2 )]
+
+[node name="Area" type="Area" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( -0.9986, 0, -0.0528996, 0, 1, 0, 0.0528996, 0, -0.9986, 0, 2.42691, 0 )
+input/ray_pickable = false
+input/capture_on_drag = false
+shape_count = 1
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+shapes/0/trigger = false
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = 9.8
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision/layers = 1
+collision/mask = 1
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="AnimationTreePlayer" type="AnimationTreePlayer" parent="."]
+
+playback/process_mode = 1
+base_path = NodePath("..")
+master_player = NodePath("../question/AnimationPlayer")
+data = {
+"active": true,
+"connections": [ "anim", "out", 0 ],
+"master": NodePath("../question/AnimationPlayer"),
+"nodes": [ {
+"filter": [  ],
+"from": "rotate",
+"id": "anim",
+"pos": Vector2( 50, 50 ),
+"type": "animation"
+}, {
+"id": "out",
+"pos": Vector2( 360, 62 ),
+"type": "output"
+} ]
+}
+
+[node name="QuestionHUD" parent="." instance=ExtResource( 3 )]
+
+[connection signal="body_enter" from="Area" to="." method="_on_Area_body_enter"]
+
+[connection signal="question_finish" from="QuestionHUD" to="." method="_on_QuestionHUD_question_finish"]
+
+
+[editable path="question"]

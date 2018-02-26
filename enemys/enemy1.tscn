@@ -1,0 +1,155 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://scripts/Enemy.gd" type="Script" id=1]
+[ext_resource path="res://models/enemys/skeleton.scn" type="PackedScene" id=2]
+
+[sub_resource type="BoxShape" id=1]
+
+extents = Vector3( 0.58153, 0.482276, 1 )
+
+[sub_resource type="BoxShape" id=2]
+
+extents = Vector3( 1.16843, 1.71523, 1.01317 )
+
+[node name="enemy1" type="KinematicBody"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+input/ray_pickable = true
+input/capture_on_drag = false
+shape_count = 1
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collide_with/static = true
+collide_with/kinematic = true
+collide_with/rigid = true
+collide_with/character = true
+collision/margin = 0.001
+script/script = ExtResource( 1 )
+damage = 0
+MoveType = null
+walkSpeed = 3
+waitWalkingTime = 3
+waitIdleTime = 3
+
+[node name="waitWalking" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = true
+autostart = false
+
+[node name="waitIdle" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 3.0
+one_shot = true
+autostart = false
+
+[node name="AnimationTreePlayer" type="AnimationTreePlayer" parent="."]
+
+playback/process_mode = 1
+base_path = NodePath("../skeleton")
+master_player = NodePath("../skeleton/AnimationPlayer")
+data = {
+"active": true,
+"connections": [ "transition", "out", 0, "idle", "transition", 0, "walk", "transition", 1 ],
+"master": NodePath("../skeleton/AnimationPlayer"),
+"nodes": [ {
+"filter": [  ],
+"from": "idle",
+"id": "idle",
+"pos": Vector2( 51, 50 ),
+"type": "animation"
+}, {
+"id": "out",
+"pos": Vector2( 402, 97 ),
+"type": "output"
+}, {
+"id": "transition",
+"pos": Vector2( 223, 94 ),
+"transitions": [ {
+"auto_advance": false
+}, {
+"auto_advance": false
+} ],
+"type": "transition",
+"xfade": 1.0
+}, {
+"filter": [  ],
+"from": "walk",
+"id": "walk",
+"pos": Vector2( 58, 177 ),
+"type": "animation"
+} ]
+}
+
+[node name="check_edge" type="RayCast" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.520527, 1.04062 )
+enabled = true
+cast_to = Vector3( 0, -2, 0 )
+layer_mask = 1
+type_mask = 15
+
+[node name="enemy_collision" type="CollisionShape" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1, 0 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="check_floor" type="RayCast" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+enabled = true
+cast_to = Vector3( 0, -1, 0 )
+layer_mask = 1
+type_mask = 15
+
+[node name="Area" type="Area" parent="."]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+transform/local = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0434866, 1.81376, 0 )
+input/ray_pickable = false
+input/capture_on_drag = false
+shape_count = 1
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+shapes/0/trigger = true
+space_override = 0
+gravity_point = false
+gravity_distance_scale = 0.0
+gravity_vec = Vector3( 0, -1, 0 )
+gravity = 9.8
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 0.0
+monitoring = true
+monitorable = true
+collision/layers = 1
+collision/mask = 1
+
+[node name="CollisionShape" type="CollisionShape" parent="Area"]
+
+_import_transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0 )
+shape = SubResource( 2 )
+trigger = true
+_update_shape_index = 0
+
+[node name="skeleton" parent="." instance=ExtResource( 2 )]
+
+transform/local = Transform( 0.37114, 0, 0, 0, 0.37114, 0, 0, 0, 0.37114, 0, 0, 0 )
+
+[node name="AnimationPlayer" parent="skeleton"]
+
+autoplay = ""
+
+[connection signal="body_enter" from="Area" to="." method="_on_Area_body_enter"]
+
+
+[editable path="skeleton"]

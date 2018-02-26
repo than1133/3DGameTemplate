@@ -1,0 +1,168 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://scripts/MessageDialog.gd" type="Script" id=1]
+[ext_resource path="res://fonts/big_match_35.fnt" type="BitmapFont" id=2]
+
+[sub_resource type="Animation" id=1]
+
+resource/name = "open_dialog"
+length = 0.5
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Dialog:rect/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.5 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 640, 570 ), Vector2( 0, 476 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Dialog:visibility/opacity")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0, 0.5 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 1.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Dialog:rect/size")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = {
+"times": FloatArray( 0, 0.5 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 40, 70 ), Vector2( 1280, 242 ) ]
+}
+
+[sub_resource type="Animation" id=2]
+
+length = 2.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Dialog/notic_next:visibility/opacity")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 1, 2 ),
+"transitions": FloatArray( 1, 1, 1 ),
+"update": 0,
+"values": [ 1.0, 0.0, 1.0 ]
+}
+
+[node name="MessageDialog" type="Control"]
+
+process/pause_mode = 2
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = true
+focus/stop_mouse = false
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 0.0
+margin/bottom = 0.0
+script/script = ExtResource( 1 )
+
+[node name="Dialog" type="Control" parent="."]
+
+anchor/left = 3
+anchor/top = 1
+anchor/right = 3
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 640.0
+margin/top = 244.0
+margin/right = -640.0
+margin/bottom = 2.0
+
+[node name="BG" type="Panel" parent="Dialog"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 37.0
+margin/top = 21.0
+margin/right = 28.0
+margin/bottom = 26.0
+
+[node name="text" type="RichTextLabel" parent="Dialog"]
+
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 59.0
+margin/top = 48.0
+margin/right = 56.0
+margin/bottom = 73.0
+custom_fonts/mono_font = ExtResource( 2 )
+custom_fonts/bold_italics_font = ExtResource( 2 )
+custom_fonts/italics_font = ExtResource( 2 )
+custom_fonts/bold_font = ExtResource( 2 )
+custom_fonts/normal_font = ExtResource( 2 )
+bbcode/enabled = true
+bbcode/bbcode = "สวัสดีครับ"
+visible_characters = -1
+percent_visible = 1.0
+
+[node name="notic_next" type="Label" parent="Dialog"]
+
+visibility/visible = false
+visibility/opacity = 0.9
+anchor/left = 1
+anchor/top = 1
+anchor/right = 1
+anchor/bottom = 1
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 262.0
+margin/top = 65.0
+margin/right = 46.0
+margin/bottom = 35.0
+custom_fonts/font = ExtResource( 2 )
+text = "Press Any Button"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="open_dialog" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/open_dialog = SubResource( 1 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "wink_next"
+
+[node name="notic_next" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/wink_next = SubResource( 2 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "wink_next"
+
+

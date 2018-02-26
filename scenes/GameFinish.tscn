@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://scripts/GameFinish.gd" type="Script" id=1]
+[ext_resource path="res://textures/wallpapers/wallpaper4.jpg" type="Texture" id=2]
+
+[node name="GameFinish" type="Control"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1280.0
+margin/bottom = 720.0
+script/script = ExtResource( 1 )
+
+[node name="bg" type="TextureFrame" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1280.0
+margin/bottom = 720.0
+texture = ExtResource( 2 )
+expand = true
+stretch_mode = 0
+
+
